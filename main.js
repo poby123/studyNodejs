@@ -1,3 +1,5 @@
+//for test git
+
 var http = require('http');
 var fs = require('fs');
 var app = http.createServer(function(request,response){
@@ -9,7 +11,7 @@ var app = http.createServer(function(request,response){
       return response.writeHead(404);
     }
     response.writeHead(200);
-    
+
     //url : /index.html etc...
     //__dirname : address of the project folder
 
