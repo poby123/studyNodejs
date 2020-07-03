@@ -40,7 +40,7 @@ var app = http.createServer(function(request,response){
           if(error){
             throw error;
           }
-          db.query(`SELECT * FROM topic where id=?`,[queryData.id], function(error2,topic){
+          db.query(`SELECT * FROM topic LEFT JOIN author ON topic.author_id=author.id where topic.id=?`,[queryData.id], function(error2,topic){
             if(error2){
               throw error2;
             }
@@ -48,7 +48,10 @@ var app = http.createServer(function(request,response){
             var description = topic[0].description;
             var list = template.list(topics);
             var html = template.html(title, list,
-              `<h2>${title}</h2><p>${description}</p>`,
+              `<h2>${title}</h2>
+              <p>${description}</p>
+              by ${topic[0].name}
+              `,
 
               `<a href="/create">create</a>
               <a href="/update?id=${queryData.id}">update</a>
